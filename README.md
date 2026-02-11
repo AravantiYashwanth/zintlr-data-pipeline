@@ -112,6 +112,7 @@ ZINTLR-DATA-PIPELINE/
 ```bash
 git clone <your-github-repository-url>
 cd ZINTLR-DATA-PIPELINE
+cd airflow
 ```
 
 ---
