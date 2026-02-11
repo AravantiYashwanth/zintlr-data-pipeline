@@ -15,7 +15,7 @@ The objective of this project is to:
 * Expose cleaned data via a REST API
 * Orchestrate the complete workflow using Apache Airflow
 
-This implementation satisfies the requirements defined in the internship assignment fileciteturn0file0.
+
 
 ---
 
@@ -73,25 +73,35 @@ graph TD
 ## 📂 Project Structure
 
 ```
+
 ZINTLR-DATA-PIPELINE/
 │
 ├── airflow/
+│   ├── api/
+│   │   ├── Dockerfile
+│   │   ├── db.py
+│   │   ├── main.py
+│   │   ├── requirements.txt
+│   │   └── schemas.py
+│   │
 │   ├── dags/
-│   │   └── zauba_scraping_cleaning_pipeline.py
+│   │   └── zintlr_scraper.py
+│   │
+│   ├── scripts/
+│   │   ├── __init__.py
+│   │   ├── cleaner.py
+│   │   ├── links.txt
+│   │   └── scraper.py
+│   │
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── requirements.txt
 │
-├── api/
-│   ├── main.py
-│   ├── db.py
-│   ├── schemas.py
-│
-├── scripts/
-│   ├── scraper.py
-│   ├── cleaner.py
-│   └── links.txt   ← (Manually collected company URLs)
-│
-├── docker-compose.yml
-├── .env
+├── screenshots/
+├── .gitignore
 └── README.md
+
+
 ```
 
 ---
