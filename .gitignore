@@ -1,11 +1,6 @@
-# Ignore secrets
-.env
-*.env
-
-# Ignore python cache
-__pycache__/
+Set-Content .gitignore ".env
+**/.env
+**/logs/
+**/__pycache__/
 *.pyc
-
-# Ignore system files
-.DS_Store
-logs/
+.DS_Store"
