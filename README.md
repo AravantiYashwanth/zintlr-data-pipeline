@@ -145,7 +145,7 @@ This starts:
 # 🔁 How to Run Airflow DAG
 
 1. Open: `http://localhost:8080`
-2. Login: `airflow / airflow`
+2. Login: `admin / admin`
 3. Find DAG: `zauba_scraping_cleaning_pipeline`
 4. Unpause DAG
 5. Click **Trigger DAG**
