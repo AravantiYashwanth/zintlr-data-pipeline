@@ -24,10 +24,8 @@ from pymongo.errors import (
 LINKS_FILE = Path("/opt/airflow/scripts/links.txt")
 
 # ================== MONGODB CONFIG ==================
-CONNECTION_STRING = (
-    "mongodb+srv://yashwantharavanti_zintlr:"
-    "kdLyBldFohW9dYI6@cluster0.ebb7yqo.mongodb.net/"
-)
+CONNECTION_STRING = ""
+
 
 DB_NAME = "zintlr"
 RAW_COLLECTION = "companies_raw"
