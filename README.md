@@ -1,157 +1,195 @@
-# ⚙️ ZaubaCorp Data Pipeline
+# ⚙️ ZaubaCorp Data Pipeline (Web Scraping · Airflow · MongoDB · FastAPI)
 
 ---
 
-## 🚨 Prerequisites & Tooling (Read First)
-
-Before running this fully dockerized project, ensure the following tools are available:
-
-### 🗄️ MongoDB Atlas (Mandatory)
-
-* Cloud-hosted MongoDB cluster used for data storage.
-* A valid **connection string (URI)** is required.
-
-### 🧭 MongoDB Compass 
-
-* Required for database visualization and verification.
-* Used to inspect:
-
-  * `companies_raw`
-  * `companies_cleaned`
-
----
-
-## 📘 Overview
+## 📘 Project Overview
 
 **ZaubaCorp Data Pipeline** is an end-to-end data engineering project built entirely in **Python**.
 
-The system:
+The objective of this project is to:
 
-* Scrapes company profile data from ZaubaCorp
-* Processes data through a structured ETL pipeline
-* Exposes cleaned data via a REST API
+* Scrape 100 company profiles from ZaubaCorp
+* Store raw scraped data in MongoDB
+* Perform data cleaning and transformation
+* Store cleaned data in a separate collection
+* Expose cleaned data via a REST API
+* Orchestrate the complete workflow using Apache Airflow
 
-### 🔧 Technology Stack
-
-* **Web Scraping:** Selenium
-* **Orchestration:** Apache Airflow
-* **Database:** MongoDB Atlas
-* **API Framework:** FastAPI
-* **Containerization:** Docker & Docker Compose
-
-The entire stack is fully containerized to ensure reproducibility and simplified deployment.
+This implementation satisfies the requirements defined in the internship assignment fileciteturn0file0.
 
 ---
 
-## 🏗️ Solution Architecture
+## ⚠️ Important Note About Scraping Strategy
+
+Due to **Cloudflare bot protection** and Selenium limitations on dynamic navigation, the scraper does NOT automatically crawl company listing pages.
+
+Instead:
+
+* 100 company profile URLs were **manually collected**
+* These URLs are stored inside:
+
+```
+scripts/links.txt
+```
+
+If you want to scrape different companies:
+
+1. Open `scripts/links.txt`
+2. Replace existing URLs with new company profile links
+3. Re-run the Airflow DAG
+
+This ensures stable scraping and avoids bot detection blocks.
+
+---
+
+## 🏗️ Architecture / Workflow
+
+The pipeline follows a structured ETL pattern:
+
+scraping → save raw → cleaning → save cleaned → expose via API
 
 ```mermaid
 graph TD
-    A[ZaubaCorp Website] -->|Selenium Scraper| B(Raw Data Extraction)
-    B -->|Store| C[(MongoDB Atlas: companies_raw)]
-    C -->|Airflow Trigger| D[Data Cleaning & Transformation]
-    D -->|Store| E[(MongoDB Atlas: companies_cleaned)]
-    E -->|Read| F[FastAPI Service]
-    F -->|POST /company| G[Client: Postman/Fastapi docs]
+    A["Predefined Company URLs - links.txt"] -->|Selenium Scraper| B["Raw Data"]
+    B -->|Insert| C[(MongoDB: companies_raw)]
+    C -->|Airflow Task| D["Cleaning & Transformation"]
+    D -->|Insert| E[(MongoDB: companies_cleaned)]
+    E -->|FastAPI| F["Client / Postman / Docs"]
 ```
 
 ---
 
-## 🔁 Airflow DAG Orchestration
+## 🧰 Technology Stack
 
-The pipeline is executed via a dedicated Airflow DAG.
+* **Language:** Python
+* **Web Scraping:** Selenium
+* **Workflow Orchestration:** Apache Airflow
+* **Database:** MongoDB Atlas (NoSQL)
+* **API Framework:** FastAPI
+* **Containerization:** Docker & Docker Compose
 
-### 📌 DAG Details
+---
 
-* **DAG ID:** `zauba_scraping_cleaning_pipeline`
-* **Schedule:** Manual Trigger (`schedule_interval=None`)
-* **Tags:** `zintlr`, `scraping`, `mongodb`
-
-### 🧩 Task Flow
-
-#### 1️⃣ scrape_and_store_raw (PythonOperator)
-
-* Scrapes 100+ company profiles using Selenium
-* Stores raw output in `companies_raw`
-
-#### 2️⃣ clean_and_store_cleaned (PythonOperator)
-
-* Cleans and normalizes data
-* Removes duplicates based on CIN
-* Stores processed data in `companies_cleaned`
-
-### 🔗 Execution Dependency
+## 📂 Project Structure
 
 ```
-scrape_task >> clean_task
+ZINTLR-DATA-PIPELINE/
+│
+├── airflow/
+│   ├── dags/
+│   │   └── zauba_scraping_cleaning_pipeline.py
+│
+├── api/
+│   ├── main.py
+│   ├── db.py
+│   ├── schemas.py
+│
+├── scripts/
+│   ├── scraper.py
+│   ├── cleaner.py
+│   └── links.txt   ← (Manually collected company URLs)
+│
+├── docker-compose.yml
+├── .env
+└── README.md
 ```
 
 ---
 
-## 🔄 Pipeline Breakdown
+# 🚀 Setup Instructions (Step-by-Step)
 
-### 🕷️ Step 1: Web Scraping
+## 1️⃣ Prerequisites
 
-Extracted Fields:
-
-* CIN
-* Company Name
-* Company Status
-* ROC
-* Registration Number
-* Company Category
-* Company Sub Category
-* Class of Company
-* Date of Incorporation
-* Authorized Capital
-* Paid-up Capital
-
-Minimum Mandatory Fields:
-
-* CIN
-* Company Name
-* Incorporation Date
-* Status
+* Docker
+* Docker Compose
+* MongoDB Atlas Account
+* MongoDB Compass (for DB verification)
 
 ---
 
-### 🗄️ Step 2: Raw Data Storage
+## 2️⃣ Clone Repository
 
-* Database: MongoDB Atlas
-* Collection: `companies_raw`
-* Purpose: Preserve source data for traceability
-
----
-
-### 🧹 Step 3: Data Cleaning & Transformation
-
-Cleaning Operations:
-
-* Remove extra whitespace
-* Normalize key names
-* Convert date fields to ISO format
-* Convert numeric fields to numeric types
-* Deduplicate records (based on CIN)
-
-Output Collection:
-
-* `companies_cleaned`
-
----
-
-### 🌐 Step 4: REST API
-
-FastAPI exposes cleaned data via endpoint.
-
-#### 📍 Endpoint: Get Company by CIN
-
-**URL:**
-
-```
-POST /company
+```bash
+git clone <your-github-repository-url>
+cd ZINTLR-DATA-PIPELINE
 ```
 
-**Request Body:**
+---
+
+## 3️⃣ Configure Environment Variables
+
+Create `.env` file:
+
+```
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/?retryWrites=true&w=majority
+MONGODB_DB=zintlr
+```
+
+---
+
+## 4️⃣ Start Services
+
+```bash
+docker-compose up --build
+```
+
+This starts:
+
+* Airflow Webserver (Port 8080)
+* Airflow Scheduler
+* FastAPI (Port 8000)
+
+---
+
+# 🔁 How to Run Airflow DAG
+
+1. Open: `http://localhost:8080`
+2. Login: `airflow / airflow`
+3. Find DAG: `zauba_scraping_cleaning_pipeline`
+4. Unpause DAG
+5. Click **Trigger DAG**
+6. Monitor logs and Graph View
+
+### Task Flow
+
+```
+scrape_and_store_raw >> clean_and_store_cleaned
+```
+
+---
+
+# 🗄️ How to Verify Data in MongoDB
+
+Use MongoDB Compass.
+
+Database: `zintlr`
+
+### Collection: companies_raw
+
+* Raw scraped records from links.txt
+
+### Collection: companies_cleaned
+
+* Cleaned records
+* Deduplicated by CIN
+* Date converted to ISO format
+* Capital fields converted to numeric
+
+---
+
+# 🌐 How to Run and Test API
+
+### Swagger UI
+
+```
+http://localhost:8000/docs
+```
+
+---
+
+### POST /company
+
+**Request:**
 
 ```json
 {
@@ -159,7 +197,7 @@ POST /company
 }
 ```
 
-**Response Example:**
+**Success Response:**
 
 ```json
 {
@@ -171,135 +209,40 @@ POST /company
 }
 ```
 
----
+**Error Response (404):**
 
-# 🚀 Setup & Execution
-
-## 🖥️ System Requirements
-
-* Docker
-* Docker Compose
-* MongoDB Atlas Account
-
----
-
-## 1️⃣ Clone Repository
-
-```bash
-git clone <your-github-repo-url>
-cd ZINTLR-DATA-PIPELINE
+```json
+{
+  "detail": "Company with given CIN not found"
+}
 ```
 
 ---
 
-## 2️⃣ Configure Environment Variables
+# ⚠️ Assumptions
 
-Create a `.env` file in the root directory:
-
-```
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/?retryWrites=true&w=majority
-MONGODB_DB=zintlr
-```
+* CIN uniquely identifies a company
+* MongoDB Atlas cluster access is configured correctly
+* links.txt contains valid ZaubaCorp company profile URLs
 
 ---
 
-## 3️⃣ Start Services (Docker)
+# 🚧 Limitations
 
-```bash
-docker-compose up --build
-```
-
-This starts:
-
-* Airflow
-* FastAPI
-* Selenium dependencies
-
----
-
-## 4️⃣ Run Airflow DAG
-
-1. Open browser → `http://localhost:8080`
-2. Login → `airflow / airflow`
-3. Locate DAG: `zauba_scraping_cleaning_pipeline`
-4. Toggle to **Unpause**
-5. Click **Trigger (▶)**
-6. Monitor **Graph View** for successful (green) execution
-
----
-
-## 5️⃣ Verify Data in MongoDB Compass
-
-Connect using your Atlas URI.
-
-Check database `zintlr`:
-
-* 📁 `companies_raw` → 100 scraped records
-* 📁 `companies_cleaned` → cleaned & deduplicated records
-
----
-
-## 6️⃣ Test the API
-
-### ✅ Health Check
-
-```
-GET http://localhost:8000/
-```
-
-### 📥 Fetch Company Data
-
-```
-POST http://localhost:8000/company
-```
-
-Use a valid CIN from your database.
-
----
-
-# 📂 Project Structure
-
-```
-ZINTLR-DATA-PIPELINE/
-│
-├── airflow/
-│   ├── dags/
-│   │   └── zauba_scraping_cleaning_pipeline.py
-│   ├── logs/
-│   └── plugins/
-│
-├── api/
-│   ├── main.py
-│   ├── db.py
-│   ├── schemas.py
-│   ├── Dockerfile
-│   └── requirements.txt
-│
-├── scripts/
-│   ├── scraper.py
-│   ├── cleaner.py
-│   └── links.txt
-│
-├── docker-compose.yml
-├── requirements.txt
-├── README.md
-└── screenshots/
-```
-
----
-
-# ✅ Key Features
-
-* End-to-end automated ETL pipeline
-* Fully Dockerized environment
-* Modular Airflow DAG design
-* CIN-based deduplication logic
-* Clear separation of raw and processed data
-* RESTful API integration
+* No automatic company discovery or pagination
+* Company URLs are predefined in `links.txt`
+* Scraper may break if website structure changes
+* Cloudflare bot protection prevents large-scale automated crawling
+* Limited to the manually provided 100 company profiles
 
 ---
 
 # 👨‍💻 Author
 
-**A. Yashwanth**
-Aspiring Data Engineer | Python & Data Engineering Enthusiast
+**A. Yashwanth**   
+Aspiring Data Engineer | Python     
+📧 [yashwantharavanti@gmail.com](mailto:yashwantharavanti@gmail.com)      
+🔗 [https://www.linkedin.com/in/yashwantharavanti](https://www.linkedin.com/in/yashwantharavanti)
+
+---
+
