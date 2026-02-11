@@ -107,7 +107,34 @@ ZINTLR-DATA-PIPELINE/
 
 ---
 
-## 2️⃣ Clone Repository
+## 2️⃣ MongoDB Atlas Configuration (IMPORTANT)
+
+Before running the project, you MUST allow your local machine IP in MongoDB Atlas.
+
+### ➤ Step 1: Add Database User
+
+1. Go to MongoDB Atlas Dashboard
+2. Navigate to:
+   **Security → Database Access**
+3. Click **Add New Database User**
+4. Create username & password
+5. Grant **Read and Write to Any Database**
+6. Save the user
+
+### ➤ Step 2: Add Your IP Address (MANDATORY)
+
+1. Go to:
+   **Security → Network Access**
+2. Click **IP Access List**
+3. Click **Add IP Address**
+4. Click **Add Current IP Address** (or manually enter your public IP)
+5. Save
+
+⚠️ If this step is not done, your containers will NOT be able to connect to MongoDB Atlas.
+
+---
+
+## 3️⃣ Clone Repository
 
 ```bash
 git clone <your-github-repository-url>
@@ -117,7 +144,7 @@ cd airflow
 
 ---
 
-## 3️⃣ Configure Environment Variables
+## 4️⃣ Configure Environment Variables
 
 Create `.env` file:
 
@@ -126,9 +153,11 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/?retryWrites
 MONGODB_DB=zintlr
 ```
 
+Replace `<username>` and `<password>` with credentials created in Atlas.
+
 ---
 
-## 4️⃣ Start Services
+## 5️⃣ Start Services
 
 ```bash
 docker-compose up --build
@@ -240,10 +269,9 @@ http://localhost:8000/docs
 
 # 👨‍💻 Author
 
-**A. Yashwanth**   
-Aspiring Data Engineer | Python     
-📧 [yashwantharavanti@gmail.com](mailto:yashwantharavanti@gmail.com)      
+**A. Yashwanth**
+Aspiring Data Engineer | Python
+📧 [yashwantharavanti@gmail.com](mailto:yashwantharavanti@gmail.com)
 🔗 [https://www.linkedin.com/in/yashwantharavanti](https://www.linkedin.com/in/yashwantharavanti)
 
 ---
-
