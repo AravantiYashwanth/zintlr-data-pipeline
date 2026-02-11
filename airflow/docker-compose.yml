@@ -1,0 +1,120 @@
+version: "3.8"
+
+# =============================
+# Airflow Common Configuration
+# =============================
+x-airflow-common:
+  &airflow-common
+  build: .
+  environment:
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__FERNET_KEY: ""
+    AIRFLOW__WEBSERVER__SECRET_KEY: zintlr_fixed_secret_key_123
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    PYTHONPATH: /opt/airflow
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+    - ./scripts:/opt/airflow/scripts
+  depends_on:
+    postgres:
+      condition: service_healthy
+    mongo:
+      condition: service_started
+
+# =============================
+# Services
+# =============================
+services:
+
+  # -----------------------------
+  # Postgres (Airflow Metadata DB)
+  # -----------------------------
+  postgres:
+    image: postgres:13
+    container_name: airflow-postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  # -----------------------------
+  # MongoDB (Raw + Cleaned Data)
+  # -----------------------------
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+  # -----------------------------
+  # Airflow Init
+  # -----------------------------
+  airflow-init:
+    <<: *airflow-common
+    container_name: airflow-init
+    command: >
+      bash -c "
+      airflow db migrate &&
+      airflow users create
+      --username admin
+      --password admin
+      --firstname Admin
+      --lastname User
+      --role Admin
+      --email admin@example.com
+      "
+    restart: "no"
+
+  # -----------------------------
+  # Airflow Webserver
+  # -----------------------------
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: airflow-webserver
+    command: webserver
+    ports:
+      - "8080:8080"
+    restart: always
+
+  # -----------------------------
+  # Airflow Scheduler
+  # -----------------------------
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: airflow-scheduler
+    command: scheduler
+    restart: always
+
+  # -----------------------------
+  # FastAPI Service
+  # -----------------------------
+  api:
+    build: ./api
+    container_name: zaubacorp-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    restart: always
+
+# =============================
+# Volumes
+# =============================
+volumes:
+  postgres-db-volume:
+  mongo-data:

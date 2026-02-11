@@ -1,0 +1,146 @@
+[2026-02-10T17:20:01.438+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: zauba_scraping_cleaning_pipeline.scrape_and_store_raw manual__2026-02-10T17:19:53.290867+00:00 [queued]>
+[2026-02-10T17:20:01.502+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: zauba_scraping_cleaning_pipeline.scrape_and_store_raw manual__2026-02-10T17:19:53.290867+00:00 [queued]>
+[2026-02-10T17:20:01.504+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-02-10T17:20:01.587+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): scrape_and_store_raw> on 2026-02-10 17:19:53.290867+00:00
+[2026-02-10T17:20:01.646+0000] {standard_task_runner.py:60} INFO - Started process 318 to run task
+[2026-02-10T17:20:01.667+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'zauba_scraping_cleaning_pipeline', 'scrape_and_store_raw', 'manual__2026-02-10T17:19:53.290867+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/zintlr_scraper.py', '--cfg-path', '/tmp/tmp84ulgeyc']
+[2026-02-10T17:20:01.671+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask scrape_and_store_raw
+[2026-02-10T17:20:02.847+0000] {task_command.py:423} INFO - Running <TaskInstance: zauba_scraping_cleaning_pipeline.scrape_and_store_raw manual__2026-02-10T17:19:53.290867+00:00 [running]> on host 70fa07491976
+[2026-02-10T17:20:03.702+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='zauba_scraping_cleaning_pipeline' AIRFLOW_CTX_TASK_ID='scrape_and_store_raw' AIRFLOW_CTX_EXECUTION_DATE='2026-02-10T17:19:53.290867+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-10T17:19:53.290867+00:00'
+[2026-02-10T17:20:03.797+0000] {scraper.py:208} INFO - Total links to scrape: 100
+[2026-02-10T17:20:03.813+0000] {scraper.py:211} INFO - [1/100] Processing: https://www.zaubacorp.com/ZINTLR-PRIVATE-LIMITED-U72900KA2022PTC165582
+[2026-02-10T17:20:03.831+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/ZINTLR-PRIVATE-LIMITED-U72900KA2022PTC165582
+[2026-02-10T17:20:03.865+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:03.903+0000] {scraper.py:211} INFO - [2/100] Processing: https://www.zaubacorp.com/GOOGLE-ENTERPRISES-PRIVATE-LIMITED-U74900UP2011PTC045365
+[2026-02-10T17:20:03.915+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/GOOGLE-ENTERPRISES-PRIVATE-LIMITED-U74900UP2011PTC045365
+[2026-02-10T17:20:03.918+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:03.926+0000] {scraper.py:211} INFO - [3/100] Processing: https://www.zaubacorp.com/GOOGLE-INDIA-PRIVATE-LIMITED-U72900KA2003PTC033028
+[2026-02-10T17:20:03.938+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/GOOGLE-INDIA-PRIVATE-LIMITED-U72900KA2003PTC033028
+[2026-02-10T17:20:03.940+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:03.950+0000] {scraper.py:211} INFO - [4/100] Processing: https://www.zaubacorp.com/GOOGLE-PAYMENT-INDIA-PRIVATE-LIMITED-U72200DL2007PTC360455
+[2026-02-10T17:20:03.954+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/GOOGLE-PAYMENT-INDIA-PRIVATE-LIMITED-U72200DL2007PTC360455
+[2026-02-10T17:20:03.955+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:03.966+0000] {scraper.py:211} INFO - [5/100] Processing: https://www.zaubacorp.com/MICROSOFT-TECHNOLOGICAL-RESEARCH-PVT-LTD-U72200WB1990PTC048500
+[2026-02-10T17:20:03.969+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/MICROSOFT-TECHNOLOGICAL-RESEARCH-PVT-LTD-U72200WB1990PTC048500
+[2026-02-10T17:20:03.970+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:03.982+0000] {scraper.py:211} INFO - [6/100] Processing: https://www.zaubacorp.com/NAKSHATRIKA-MICROSOFT-LIMITED-U30002MP1993PLC007685
+[2026-02-10T17:20:03.984+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/NAKSHATRIKA-MICROSOFT-LIMITED-U30002MP1993PLC007685
+[2026-02-10T17:20:03.985+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:03.989+0000] {scraper.py:211} INFO - [7/100] Processing: https://www.zaubacorp.com/TCS-INVESTMENTS-PRIVATE-LIMITED-U67120TZ1994PTC005541
+[2026-02-10T17:20:03.991+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/TCS-INVESTMENTS-PRIVATE-LIMITED-U67120TZ1994PTC005541
+[2026-02-10T17:20:03.995+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:04.004+0000] {scraper.py:211} INFO - [8/100] Processing: https://www.zaubacorp.com/TCS-BUILDTECH-PRIVATE-LIMITED-U70109DL2006PTC150945
+[2026-02-10T17:20:04.005+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/TCS-BUILDTECH-PRIVATE-LIMITED-U70109DL2006PTC150945
+[2026-02-10T17:20:04.011+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:04.016+0000] {scraper.py:211} INFO - [9/100] Processing: https://www.zaubacorp.com/TCS-FOUNDATION-U74999MH2015NPL262710
+[2026-02-10T17:20:04.020+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/TCS-FOUNDATION-U74999MH2015NPL262710
+[2026-02-10T17:20:04.021+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:04.029+0000] {scraper.py:211} INFO - [10/100] Processing: https://www.zaubacorp.com/TCS-E-SERVE-LIMITED-U65990MH1984PLC033929
+[2026-02-10T17:20:04.031+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/TCS-E-SERVE-LIMITED-U65990MH1984PLC033929
+[2026-02-10T17:20:04.032+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:04.036+0000] {scraper.py:211} INFO - [11/100] Processing: https://www.zaubacorp.com/TCS-MARKENTILE-PRIVATE-LIMITED-U74999WB2010PTC153847
+[2026-02-10T17:20:04.038+0000] {scraper.py:225} ERROR - Failed URL: https://www.zaubacorp.com/TCS-MARKENTILE-PRIVATE-LIMITED-U74999WB2010PTC153847
+[2026-02-10T17:20:04.039+0000] {scraper.py:226} ERROR - Reason: WebDriver.__init__() got an unexpected keyword argument 'service'
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 214, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 116, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 96, in create_driver
+    return webdriver.Chrome(service=service, options=options)
+TypeError: WebDriver.__init__() got an unexpected keyword argument 'service'
+[2026-02-10T17:20:04.050+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/scripts/scraper.py", line 230, in scrape_pipeline
+    raise AirflowFailException(
+airflow.exceptions.AirflowFailException: Too many failures (11/100)
+[2026-02-10T17:20:04.325+0000] {taskinstance.py:1138} INFO - Immediate failure requested. Marking task as FAILED. dag_id=zauba_scraping_cleaning_pipeline, task_id=scrape_and_store_raw, execution_date=20260210T171953, start_date=20260210T172001, end_date=20260210T172004
+[2026-02-10T17:20:04.566+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 4 for task scrape_and_store_raw (Too many failures (11/100); 318)
+[2026-02-10T17:20:04.770+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-10T17:20:05.085+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

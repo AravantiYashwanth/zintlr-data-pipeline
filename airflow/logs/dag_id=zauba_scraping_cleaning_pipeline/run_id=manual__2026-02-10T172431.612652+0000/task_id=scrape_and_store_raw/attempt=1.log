@@ -1,0 +1,520 @@
+[2026-02-10T17:24:49.401+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: zauba_scraping_cleaning_pipeline.scrape_and_store_raw manual__2026-02-10T17:24:31.612652+00:00 [queued]>
+[2026-02-10T17:24:49.601+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: zauba_scraping_cleaning_pipeline.scrape_and_store_raw manual__2026-02-10T17:24:31.612652+00:00 [queued]>
+[2026-02-10T17:24:49.616+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2026-02-10T17:24:49.859+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): scrape_and_store_raw> on 2026-02-10 17:24:31.612652+00:00
+[2026-02-10T17:24:49.944+0000] {standard_task_runner.py:60} INFO - Started process 432 to run task
+[2026-02-10T17:24:50.176+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'zauba_scraping_cleaning_pipeline', 'scrape_and_store_raw', 'manual__2026-02-10T17:24:31.612652+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/zintlr_scraper.py', '--cfg-path', '/tmp/tmpgg6trcwd']
+[2026-02-10T17:24:50.310+0000] {standard_task_runner.py:88} INFO - Job 6: Subtask scrape_and_store_raw
+[2026-02-10T17:24:51.943+0000] {task_command.py:423} INFO - Running <TaskInstance: zauba_scraping_cleaning_pipeline.scrape_and_store_raw manual__2026-02-10T17:24:31.612652+00:00 [running]> on host 70fa07491976
+[2026-02-10T17:24:56.190+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='zauba_scraping_cleaning_pipeline' AIRFLOW_CTX_TASK_ID='scrape_and_store_raw' AIRFLOW_CTX_EXECUTION_DATE='2026-02-10T17:24:31.612652+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-10T17:24:31.612652+00:00'
+[2026-02-10T17:24:56.319+0000] {scraper.py:207} INFO - Total links to scrape: 100
+[2026-02-10T17:24:56.324+0000] {scraper.py:210} INFO - [1/100] https://www.zaubacorp.com/ZINTLR-PRIVATE-LIMITED-U72900KA2022PTC165582
+[2026-02-10T17:24:59.332+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/ZINTLR-PRIVATE-LIMITED-U72900KA2022PTC165582
+[2026-02-10T17:24:59.333+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:24:59.389+0000] {scraper.py:210} INFO - [2/100] https://www.zaubacorp.com/GOOGLE-ENTERPRISES-PRIVATE-LIMITED-U74900UP2011PTC045365
+[2026-02-10T17:25:00.456+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/GOOGLE-ENTERPRISES-PRIVATE-LIMITED-U74900UP2011PTC045365
+[2026-02-10T17:25:00.469+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:00.481+0000] {scraper.py:210} INFO - [3/100] https://www.zaubacorp.com/GOOGLE-INDIA-PRIVATE-LIMITED-U72900KA2003PTC033028
+[2026-02-10T17:25:01.565+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/GOOGLE-INDIA-PRIVATE-LIMITED-U72900KA2003PTC033028
+[2026-02-10T17:25:01.612+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:01.687+0000] {scraper.py:210} INFO - [4/100] https://www.zaubacorp.com/GOOGLE-PAYMENT-INDIA-PRIVATE-LIMITED-U72200DL2007PTC360455
+[2026-02-10T17:25:02.805+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/GOOGLE-PAYMENT-INDIA-PRIVATE-LIMITED-U72200DL2007PTC360455
+[2026-02-10T17:25:02.818+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:02.925+0000] {scraper.py:210} INFO - [5/100] https://www.zaubacorp.com/MICROSOFT-TECHNOLOGICAL-RESEARCH-PVT-LTD-U72200WB1990PTC048500
+[2026-02-10T17:25:04.122+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/MICROSOFT-TECHNOLOGICAL-RESEARCH-PVT-LTD-U72200WB1990PTC048500
+[2026-02-10T17:25:04.397+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:04.461+0000] {scraper.py:210} INFO - [6/100] https://www.zaubacorp.com/NAKSHATRIKA-MICROSOFT-LIMITED-U30002MP1993PLC007685
+[2026-02-10T17:25:05.663+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/NAKSHATRIKA-MICROSOFT-LIMITED-U30002MP1993PLC007685
+[2026-02-10T17:25:05.673+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:05.712+0000] {scraper.py:210} INFO - [7/100] https://www.zaubacorp.com/TCS-INVESTMENTS-PRIVATE-LIMITED-U67120TZ1994PTC005541
+[2026-02-10T17:25:06.792+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/TCS-INVESTMENTS-PRIVATE-LIMITED-U67120TZ1994PTC005541
+[2026-02-10T17:25:06.793+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:06.798+0000] {scraper.py:210} INFO - [8/100] https://www.zaubacorp.com/TCS-BUILDTECH-PRIVATE-LIMITED-U70109DL2006PTC150945
+[2026-02-10T17:25:07.825+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/TCS-BUILDTECH-PRIVATE-LIMITED-U70109DL2006PTC150945
+[2026-02-10T17:25:07.826+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:07.840+0000] {scraper.py:210} INFO - [9/100] https://www.zaubacorp.com/TCS-FOUNDATION-U74999MH2015NPL262710
+[2026-02-10T17:25:08.886+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/TCS-FOUNDATION-U74999MH2015NPL262710
+[2026-02-10T17:25:08.884+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:08.901+0000] {scraper.py:210} INFO - [10/100] https://www.zaubacorp.com/TCS-E-SERVE-LIMITED-U65990MH1984PLC033929
+[2026-02-10T17:25:09.984+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/TCS-E-SERVE-LIMITED-U65990MH1984PLC033929
+[2026-02-10T17:25:09.997+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:10.016+0000] {scraper.py:210} INFO - [11/100] https://www.zaubacorp.com/TCS-MARKENTILE-PRIVATE-LIMITED-U74999WB2010PTC153847
+[2026-02-10T17:25:11.135+0000] {scraper.py:224} ERROR - Failed URL: https://www.zaubacorp.com/TCS-MARKENTILE-PRIVATE-LIMITED-U74999WB2010PTC153847
+[2026-02-10T17:25:11.151+0000] {scraper.py:225} ERROR - Reason: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+Traceback (most recent call last):
+  File "/opt/airflow/scripts/scraper.py", line 213, in scrape_pipeline
+    data = scrape_company(url)
+  File "/opt/airflow/scripts/scraper.py", line 118, in scrape_company
+    driver = create_driver()
+  File "/opt/airflow/scripts/scraper.py", line 95, in create_driver
+    return webdriver.Chrome(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/chrome/webdriver.py", line 76, in __init__
+    RemoteWebDriver.__init__(
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 157, in __init__
+    self.start_session(capabilities, browser_profile)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 252, in start_session
+    response = self.execute(Command.NEW_SESSION, parameters)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/webdriver.py", line 319, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 374, in execute
+    return self._request(command_info[0], url, body=data)
+  File "/home/airflow/.local/lib/python3.10/site-packages/selenium/webdriver/remote/remote_connection.py", line 397, in _request
+    resp = self._conn.request(method, url, body=body, headers=headers)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 118, in request
+    return self.request_encode_body(
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/_request_methods.py", line 217, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 432, in urlopen
+    conn = self.connection_from_host(u.host, port=u.port, scheme=u.scheme)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 303, in connection_from_host
+    return self.connection_from_context(request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 328, in connection_from_context
+    return self.connection_from_pool_key(pool_key, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 351, in connection_from_pool_key
+    pool = self._new_pool(scheme, host, port, request_context=request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/poolmanager.py", line 265, in _new_pool
+    return pool_cls(host, port, **request_context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 197, in __init__
+    timeout = Timeout.from_float(timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 190, in from_float
+    return Timeout(read=timeout, connect=timeout)
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 119, in __init__
+    self._connect = self._validate_timeout(connect, "connect")
+  File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/timeout.py", line 156, in _validate_timeout
+    raise ValueError(
+ValueError: Timeout value connect was <object object at 0x7c9df29e4980>, but it must be an int, float or None.
+[2026-02-10T17:25:11.216+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/scripts/scraper.py", line 228, in scrape_pipeline
+    raise AirflowFailException(
+airflow.exceptions.AirflowFailException: Too many failures (11/100)
+[2026-02-10T17:25:11.304+0000] {taskinstance.py:1138} INFO - Immediate failure requested. Marking task as FAILED. dag_id=zauba_scraping_cleaning_pipeline, task_id=scrape_and_store_raw, execution_date=20260210T172431, start_date=20260210T172449, end_date=20260210T172511
+[2026-02-10T17:25:11.467+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 6 for task scrape_and_store_raw (Too many failures (11/100); 432)
+[2026-02-10T17:25:11.589+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-10T17:25:11.759+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
